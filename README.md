@@ -2,6 +2,12 @@
 
 ## Introduction
 
+### RetinaMNIST Dataset
+
+The RetinaMNIST datset is part of the larger MEdMNIST datset, consisitng of 18 standarized 2D and 3D medical image datasets [1, 2]. For this assignment, only the RetinaMNIST datset is used, which consists of 1600 retina fundus images, split into training, validation and testing sets. Unlike most of the other datsets which are classification problems, the RetinaMNIST involes ordinal regression for 5 different severity levels of diabetic retinopathy [1]. Ordinal regression is similar to classification, but the values in this case exist on a scale and the ordering of the classes on the scale is important (unlike regular classification problems, where the classes to be predicted are discrete and unordered). 
+
+The goal of this assignment is to compare the preformance of mutlilayer preceptron (MLP) networks vs convolutional neural networks (CNNs). 
+
 ### Multi-Layer Preceptron
 
 #### Network Layers and Neuron Operation
@@ -28,6 +34,36 @@ While not unique to CNNs, dropout layers are particularly important when dealing
 
 ## Code 
 
+### General 
+
+Main function:
+
+      --> convolutional_network/multi_layer_network class   
+
+            --> init function   
+
+                  --> Opens the RetinaMNIST dataset and loads the images and labels for the training, validation and testing datasets. The learning rate, loss function, epoch and batch size are defined in this function as well. 
+
+            --> view_label_distribution function
+
+                  --> This displays the size of each of the datasets.
+
+            --> define_model function
+
+                  --> This function for both classes defines the model archeture using the Keras python libary.
+
+            --> train_CNN_model function
+
+                  --> This function complies the model using the optimizer, learning rate and loss specified by the user. Class weights are also calculated in this function to help mitigate the class imbalance of the retina dataset. The model is finally fit to the data and returns the fitted model.
+
+            --> test_model function
+
+                  --> Most of the analysis of the network is done in this function. The Keras predict function is used to test the model. The class with the output neuron containing the highest value is taken as the model prediction and compared against the test labels.
+
+            --> plot_learning_curves function
+
+                  --> Short function to plot the training and validation loss curves
+
 ### Network
 
 ### Hyperparameters
@@ -37,3 +73,9 @@ While not unique to CNNs, dropout layers are particularly important when dealing
 ## Discussion
 
 ## Conclusion
+
+## References 
+
+[1] Jiancheng Yang, Rui Shi, Donglai Wei, Zequan Liu, Lin Zhao, Bilian Ke, Hanspeter Pfister, Bingbing Ni. Yang, Jiancheng, et al. "MedMNIST v2-A large-scale lightweight benchmark for 2D and 3D biomedical image classification." Scientific Data, 2023.
+                            
+[2] Jiancheng Yang, Rui Shi, Bingbing Ni. "MedMNIST Classification Decathlon: A Lightweight AutoML Benchmark for Medical Image Analysis". IEEE 18th International Symposium on Biomedical Imaging (ISBI), 2021.
